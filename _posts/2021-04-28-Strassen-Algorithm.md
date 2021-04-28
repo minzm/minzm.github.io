@@ -7,11 +7,11 @@ categories: jekyll update
 1.Strassen Algorithm이란?
 ================
 Strassen Algorithm은 독일의 수학자 Volker Strassen이 1969년에 개발한 행렬 곱셈 알고리즘이다.
-행렬을 가로세로 반씩 쪼개 4등분해서 곱하면, 단순하게 할 경우 작은 행렬의 곱셈이 8번 필요하므로 복잡도는 그대로입니다.
-하지만 이를 조금 더 많은 덧셈을 동원하여 바꾸어 7번의 곱셈만으로 수행할 수 있다는 것이 Strassen Algorithm의 핵심이다.
 
-2. Algorithm 설명
-============
+
+Algorithm 설명
+---------------------
+
 1 단계 : A, B, C를 가정하기 위해 3 개의 행렬을 만들고 여기서 C는 결과 행렬이고 A와 B는 Strassen의 방법을 사용하여 곱해질 행렬이다.
 
 	A = {A11 A12 A21 A22}, B = {B11 B12 B21 B22}, C = {C11 C12 C21 C22}
@@ -33,11 +33,11 @@ Strassen Algorithm은 독일의 수학자 Volker Strassen이 1969년에 개발�
 	C21 = M2 + M4 
 	C22 = M1 − M2 + M3 + M6
 
-코드(JAVA)
+2.코드(JAVA)
 =======
 
 {% highlight ruby %}
-import java.util.Scanner;                                       // Scanner를 사용하기 위한 import 문
+import java.util.Scanner; 
 
 public class Strassen
 {
@@ -66,22 +66,22 @@ public class Strassen
     /** 행렬을 곱하는 함수 **/
     public int[][] multiply(int[][] A, int[][] B)
     {
-        int n = A.length;                                       // n은 배열 A의 길이
-        int[][] G = new int[n][n];                              // 2차원 배열 생성 및 선언
+        int n = A.length;  
+        int[][] G = new int[n][n];  
 
-        if (n == 1)                                             // 크기가 1이면 그냥 곱하면 된다
+        if (n == 1)  
             G[0][0] = A[0][0] * B[0][0];
         else
         {
-            int[][] A11 = new int[n/2][n/2];                    // 2차원 배열 A11 생성 (행렬 A의 첫 번째 부분)
-            int[][] A12 = new int[n/2][n/2];                    // 2차원 배열 A12 생성 (행렬 A의 두 번째 부분)
-            int[][] A21 = new int[n/2][n/2];                    // 2차원 배열 A21 생성 (행렬 A의 세 번째 부분)
-            int[][] A22 = new int[n/2][n/2];                    // 2차원 배열 A22 생성 (행렬 A의 네 번째 부분)
+            int[][] A11 = new int[n/2][n/2};
+            int[][] A12 = new int[n/2][n/2]; 
+            int[][] A21 = new int[n/2][n/2];
+            int[][] A22 = new int[n/2][n/2]; 
 
-            int[][] B11 = new int[n/2][n/2];                    // 2차원 배열 B11 생성 (행렬 B의 첫 번째 부분)
-            int[][] B12 = new int[n/2][n/2];                    // 2차원 배열 B12 생성 (행렬 B의 두 번째 부분)
-            int[][] B21 = new int[n/2][n/2];                    // 2차원 배열 B21 생성 (행렬 B의 세 번째 부분)
-            int[][] B22 = new int[n/2][n/2];                    // 2차원 배열 B22 생성 (행렬 B의 네 번째 부분)
+            int[][] B11 = new int[n/2][n/2]; 
+            int[][] B12 = new int[n/2][n/2];  
+            int[][] B21 = new int[n/2][n/2];
+            int[][] B22 = new int[n/2][n/2];  
 
 
             /**
@@ -123,27 +123,26 @@ public class Strassen
     /** Main 함수 시작 **/
     public static void main (String[] args)
     {
-        Scanner scan = new Scanner(System.in);                        // Scanner 객체 생성
+        Scanner scan = new Scanner(System.in);                       
         System.out.println("Strassen Algorithm\n");
 
-        Strassen s = new Strassen();                                  // Strassen 객체 생성
-
+        Strassen s = new Strassen();                                
         System.out.println("n을 입력하세요 :");
-        int N = scan.nextInt();                                       // 키 입력 부분
+        int N = scan.nextInt();                                       
 
         System.out.println("A 행렬을 생성하세요\n");
-        int[][] A = new int[N][N];                                    // 행렬 생성
-        for (int i = 1; i < N + 1; i++)                                   // 입력한 크기에 맞는 행렬을 생성 후
-            for (int p = 1; p < N + 1; p++)                               // 차례대로 원소들을 입력 해주게 하는 for 문
-                A[i][p] = scan.nextInt();                             // 행렬 A를 입력하여 생성
+        int[][] A = new int[N][N];                                    
+        for (int i = 1; i < N + 1; i++)              
+            for (int p = 1; p < N + 1; p++)                               
+                A[i][p] = scan.nextInt();                             
 
         System.out.println("B 행렬을 생성하세요\n");
-        int[][] B = new int[N][N];                                    // 위와 동일
+        int[][] B = new int[N][N];                                    
         for (int i = 1; i < N + 1; i++)
             for (int p = 1; p < N + 1; p++)
                 B[i][p] = scan.nextInt();
 
-        int[][] C = s.multiply(A, B);                                 // Strassen 객체 s에 결과행렬 C 생성
+        int[][] C = s.multiply(A, B);                                 
 
         System.out.println("행렬 A와 B의 곱 : ");
         for (int i = 1; i < N + 1; i++)
@@ -156,6 +155,12 @@ public class Strassen
     }
 }
 {% endhighlight %}
+
+
+3. Strassen Algorithm 성능
+==================
+두 행렬을 곱하는 것보다 이 알고리즘을 사용했을 경우 더 적은 시간이 소요된다. 하지만 Strassen Algorithm은 속도에 비해 수치 안정성이 떨어지는 것으로 알려져있따.
+때문에 성능적인 면에서 이 알고리즘은 속도는 빠르지만 실제 오차가 일반적인 행렬 곱셈보다 더 크다.
 
 
 
